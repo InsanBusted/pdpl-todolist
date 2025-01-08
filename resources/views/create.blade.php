@@ -31,6 +31,13 @@
                     <option value="2">MEDIUM</option>
                     <option value="3">LOW</option>
                   </select>
+               
+                <select class="form-select d-none" aria-label="Default select example" name="status">
+                    <option selected value="0">HIGH</option>
+                  </select>
+               
+                
+                
 
                 <label for="" class="form-label mt-4">Work Description</label>
                 <textarea type="text" name="work" class="form-control"></textarea>

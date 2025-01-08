@@ -40,6 +40,9 @@ class SaveTodoHandler extends Handler
         // Mengatur atribut "prioritas" dari request ke properti "prioritas" model todos.
         $todo->prioritas = $request['prioritas'];
 
+        // Mengatur atribut "status" dari request ke properti "status" model todos.
+        $todo->status = $request['status'];
+
         // Mengatur atribut "dueDate" dari request ke properti "dueDate" model todos.
         $todo->dueDate = $request['dueDate'];
         

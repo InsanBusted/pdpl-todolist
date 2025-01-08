@@ -28,14 +28,13 @@ class todosController extends Controller
             // Buat handler untuk validasi dan penyimpanan
             $validationHandler = new ValidationHandler();
             $saveTodoHandler = new SaveTodoHandler();
-
+            
             
             // Hubungkan handler ke dalam chain
             $validationHandler->setNext($saveTodoHandler);
             
             // Eksekusi chain
             $validationHandler->handle($request);
-            // dd($validationHandler);
             
 
             return redirect(route("todo.home"))->with('success', 'Todo successfully added!');
@@ -65,6 +64,7 @@ class todosController extends Controller
             'name' => 'required|string|max:255',
             'work' => 'required|string|max:255',
             'prioritas' => 'required|in:"1","2","3"',
+            'status' => 'required|in:0,1',
             'dueDate' => 'required|date',
             ]);
         
@@ -72,6 +72,7 @@ class todosController extends Controller
             $todo->name = $request->name;
             $todo->work = $request->work;
             $todo->prioritas = $request->prioritas;
+            $todo->status = $request->status;
             $todo->dueDate = $request->dueDate;
             $todo->save();
     

@@ -46,6 +46,13 @@
                     <option value="3" {{ $todo->prioritas === 3 ? 'selected' : '' }}>LOW</option>
                 </select>
 
+                {{-- TASK STATUS --}}
+                <label for="prioritas" class="form-label mt-4">Task Completion Status</label>
+                <select class="form-select" aria-label="Default select example" name="status">
+                    <option value="0" {{ $todo->status === 0 ? 'selected' : '' }}>INCOMPLETE</option>
+                    <option value="1" {{ $todo->status === 1 ? 'selected' : '' }}>COMPLETED</option>
+                </select>
+
                 {{-- Due Date Input --}}
                 <label for="dueDate" class="form-label mt-4">Due Date</label>
                 <input type="date" name="dueDate" id="dueDate" class="form-control" value="{{ old('dueDate', $todo->dueDate) }}">

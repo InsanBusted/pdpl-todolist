@@ -39,7 +39,7 @@
 
     .todo-done {
         border-left: 6px solid #28a745 !important;
-        background: linear-gradient(135deg, #e8f7e9, #ffffff);
+        background: linear-gradient(135deg, #c6c8c9, #04a811);
     }
 
     .todo-badge {
@@ -141,63 +141,65 @@
     <!-- Cards for Todos -->
     <div class="row">
         @forelse ($todos as $todo)
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card todo-card {{ $todo->status == 'done' ? 'todo-done' : '' }} border-0 shadow-sm h-100">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <h5 class="card-title fw-bold {{ $todo->prioritas == 'done' ? 'done' : '' }}">
-                                <i class="fa {{ $todo->prioritas === '1' ? 'fa-circle text-danger' : 'd-none' }} me-2 todo-icon"></i>
-                                <i class="fa {{ $todo->prioritas === '2' ? 'fa-circle text-warning' : 'd-none' }} me-2 todo-icon"></i>
-                                <i class="fa {{ $todo->prioritas === '3' ? 'fa-circle text-success' : 'd-none' }} me-2 todo-icon"></i>
-                                {{ $todo->name }}
-                            </h5>
-                            <p class="card-text mb-2">
-                                <span class="badge badge-primary todo-badge me-2">Work</span>
-                                <span class="text-muted"><i class="fa fa-tasks me-1"></i> {{ $todo->work }}</span>
-                            </p>
-                            {{-- HIGH --}}
-                            <p class="card-text mb-2 {{ $todo->prioritas === '1' ? '' : 'd-none' }}">
-                                <span class="badge {{ $todo->prioritas === '1' ? 'bg-danger' : '' }} todo-badge me-2">Priority</span>
-                                <span class="{{ $todo->prioritas === '1' ? 'text-danger' : 'd-none' }}">
-                                    <i class="fa fa-tasks me-1"></i> HIGH
-                                </span>
-                            </p>
-                            {{-- MEDIUM --}}
-                            <p class="card-text mb-2 {{ $todo->prioritas === '2' ? '' : 'd-none' }}">
-                                <span class="badge {{ $todo->prioritas === '2' ? 'bg-warning' : '' }} todo-badge me-2">Priority</span>
-                                <span class="{{ $todo->prioritas === '2' ? 'text-warning' : 'd-none' }}">
-                                    <i class="fa fa-tasks me-1"></i> MEDIUM
-                                </span>
-                            </p>
-                            {{-- LOW --}}
-                            <p class="card-text mb-2 {{ $todo->prioritas === '3' ? '' : 'd-none' }}">
-                                <span class="badge {{ $todo->prioritas === '3' ? 'bg-success' : '' }} todo-badge me-2">Priority</span>
-                                <span class="{{ $todo->prioritas === '3' ? 'text-success' : 'd-none' }}">
-                                    <i class="fa fa-tasks me-1"></i> LOW
-                                </span>
-                            </p>
-                            
-                            <p class="card-text">
-                                <span class="badge badge-warning text-dark todo-badge me-2">Due Date</span>
-                                <span class="text-secondary"><i class="fa fa-calendar-alt me-1"></i> {{ $todo->dueDate }}</span>
-                            </p>
-                        </div>
+            @if($todo->status == 0)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card todo-card border-0 shadow-sm h-100">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title fw-bold {{ $todo->prioritas == 'done' ? 'done' : '' }}">
+                                    <i class="fa {{ $todo->prioritas === '1' ? 'fa-circle text-danger' : 'd-none' }} me-2 todo-icon"></i>
+                                    <i class="fa {{ $todo->prioritas === '2' ? 'fa-circle text-warning' : 'd-none' }} me-2 todo-icon"></i>
+                                    <i class="fa {{ $todo->prioritas === '3' ? 'fa-circle text-success' : 'd-none' }} me-2 todo-icon"></i>
+                                    {{ $todo->name }}
+                                </h5>
+                                <p class="card-text mb-2">
+                                    <span class="badge badge-primary todo-badge me-2">Work</span>
+                                    <span class="text-muted"><i class="fa fa-tasks me-1"></i> {{ $todo->work }}</span>
+                                </p>
+                                {{-- HIGH --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '1' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '1' ? 'bg-danger' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '1' ? 'text-danger' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> HIGH
+                                    </span>
+                                </p>
+                                {{-- MEDIUM --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '2' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '2' ? 'bg-warning' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '2' ? 'text-warning' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> MEDIUM
+                                    </span>
+                                </p>
+                                {{-- LOW --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '3' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '3' ? 'bg-success' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '3' ? 'text-success' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> LOW
+                                    </span>
+                                </p>
+                                
+                                <p class="card-text">
+                                    <span class="badge badge-warning text-dark todo-badge me-2">Due Date</span>
+                                    <span class="text-secondary"><i class="fa fa-calendar-alt me-1"></i> {{ $todo->dueDate }}</span>
+                                </p>
+                            </div>
 
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-sm btn-success btn-hover">
-                                <i class="fa fa-edit"></i> Update
-                            </a>
-                            <form action="{{ route('todo.delete', $todo->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this todo?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger btn-hover">
-                                    <i class="fa fa-trash"></i> Delete
-                                </button>
-                            </form>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-sm btn-success btn-hover">
+                                    <i class="fa fa-edit"></i> Update
+                                </a>
+                                <form action="{{ route('todo.delete', $todo->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this todo?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger btn-hover">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @empty
             <div class="col-12">
                 <div class="alert alert-info empty-todo">
@@ -206,5 +208,84 @@
             </div>
         @endforelse
     </div>
+
+    <div class="row">
+        <div class="col-md-auto">
+            <h2 class="text-success">My Todo List Completly</h2>
+        </div>
+    </div>
+
+     <!-- Cards for Todos -->
+     <div class="row ">
+        @forelse ($todos as $todo)
+            @if($todo->status == 1)
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card todo-card {{ $todo->status == 1 ? 'todo-done' : 'd-none' }} border-0 shadow-sm h-100">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title fw-bold {{ $todo->prioritas == 'done' ? 'done' : '' }}">
+                                    <i class="fa {{ $todo->prioritas === '1' ? 'fa-circle text-danger' : 'd-none' }} me-2 todo-icon"></i>
+                                    <i class="fa {{ $todo->prioritas === '2' ? 'fa-circle text-warning' : 'd-none' }} me-2 todo-icon"></i>
+                                    <i class="fa {{ $todo->prioritas === '3' ? 'fa-circle text-success' : 'd-none' }} me-2 todo-icon"></i>
+                                    {{ $todo->name }}
+                                </h5>
+                                <p class="card-text mb-2">
+                                    <span class="badge badge-primary todo-badge me-2">Work</span>
+                                    <span class="text-white"><i class="fa fa-tasks me-1"></i> {{ $todo->work }}</span>
+                                </p>
+                                {{-- HIGH --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '1' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '1' ? 'bg-danger' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '1' ? 'text-danger' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> HIGH
+                                    </span>
+                                </p>
+                                {{-- MEDIUM --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '2' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '2' ? 'bg-warning' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '2' ? 'text-warning' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> MEDIUM
+                                    </span>
+                                </p>
+                                {{-- LOW --}}
+                                <p class="card-text mb-2 {{ $todo->prioritas === '3' ? '' : 'd-none' }}">
+                                    <span class="badge {{ $todo->prioritas === '3' ? 'bg-success' : '' }} todo-badge me-2">Priority</span>
+                                    <span class="{{ $todo->prioritas === '3' ? 'text-success' : 'd-none' }}">
+                                        <i class="fa fa-tasks me-1"></i> LOW
+                                    </span>
+                                </p>
+                                
+                                <p class="card-text">
+                                    <span class="badge badge-warning text-dark todo-badge me-2">Due Date</span>
+                                    <span class="text-white"><i class="fa fa-calendar-alt me-1"></i> {{ $todo->dueDate }}</span>
+                                </p>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="{{ route('todo.edit', $todo->id) }}" class="btn btn-sm btn-success btn-hover">
+                                    <i class="fa fa-edit"></i> Update
+                                </a>
+                                <form action="{{ route('todo.delete', $todo->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this todo?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger btn-hover">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @empty
+            <div class="col-12">
+                <div class="alert alert-info empty-todo">
+                    <i class="fa fa-info-circle"></i> Todo List Masih kosong, Silahkan Buat ToDo List!
+                </div>
+            </div>
+        @endforelse
+    </div>
+
+
 </div>
 @endsection
